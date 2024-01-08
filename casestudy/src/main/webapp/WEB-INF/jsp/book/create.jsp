@@ -3,7 +3,7 @@
 
 <section class="bg-light-purple text-dark pt-2 pb-1">
     <div class="container text-center">
-        <h1 class="m-0">Add/Update Book</h1>
+        <h1 class="m-0">Add/Update Books</h1>
     </div>
 </section>
 
@@ -21,7 +21,7 @@
 
         <!-- Use POST method for form submissions that modify data -->
         <form method="post" action="/book/createSubmit" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="${form.id}">
+        <input type="hidden" name="id" value="${form.id}">
             <div class="row mt-4">
                 <div class="col-md-6">
                     <label for="name" class="form-label">Book Name</label>
