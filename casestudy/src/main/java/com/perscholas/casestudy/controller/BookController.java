@@ -186,7 +186,7 @@ import java.util.UUID;
 
     @GetMapping("/book/delete{id}")
     public ModelAndView deleteBooks(@RequestParam(required = false) String search,@RequestParam Integer bookId,
-                                             @RequestParam(required = false, defaultValue = "1") int page) {
+                                    @RequestParam(required = false, defaultValue = "1") int page) {
         ModelAndView response = new ModelAndView("book/display");
 
         log.debug("In display Book with no args - log.debug");
@@ -220,6 +220,6 @@ import java.util.UUID;
     }
 
 
-    }
+}
 
 

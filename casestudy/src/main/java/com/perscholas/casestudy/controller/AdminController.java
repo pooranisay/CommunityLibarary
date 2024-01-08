@@ -45,7 +45,7 @@ public class AdminController {
     @Autowired
     private ReserveDAO reserveDAO;
 
-    @GetMapping("/book/create")
+    @PostMapping("/book/create")
     public ModelAndView createBook() {
         ModelAndView response = new ModelAndView("book/create");
 
@@ -54,6 +54,7 @@ public class AdminController {
 
         return response;
     }
+
     @PostMapping("/book/createSubmit")
     public ModelAndView createBookSubmit(@Valid CreateBookFormBean form, BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
 
@@ -89,10 +90,11 @@ public class AdminController {
         return response;
 
     }
-    private String handleFileUpload(MultipartFile  file) {
+
+    private String handleFileUpload(MultipartFile file) {
         try {
             // Get the absolute path to the directory where you want to save the file
-            String uploadDir = "C:/Users/Anna_/OneDrive/Documents/casestudy/casestudy/src/main/webapp/pub/image/";
+            String uploadDir = "C:/Users/Anna_/OneDrive/Documents/casestudy/CommunityLibarary/casestudy/src/main/webapp/pub/image/";
 
             // Create the directory if it doesn't exist
             File dir = new File(uploadDir);
@@ -122,7 +124,7 @@ public class AdminController {
 
     @GetMapping("/book/reserveProcess")
     public ModelAndView ReserveProcess(@RequestParam(required = false) String search,
-                                             @RequestParam(required = false, defaultValue = "1") int page) {
+                                       @RequestParam(required = false, defaultValue = "1") int page) {
         ModelAndView response = new ModelAndView("book/reserveProcess");
 
         log.debug("In display Reservation Process with no args - log.debug");
@@ -136,14 +138,14 @@ public class AdminController {
 
         return response;
     }
+
     @GetMapping("/book/adminUnReserve")
     public ModelAndView adminUnReserve(
             @RequestParam Integer bookId, @RequestParam Integer reservationId,
-            @RequestParam(required = false, defaultValue = "1") int weeksToExtend, HttpServletRequest request)
-    {
+            @RequestParam(required = false, defaultValue = "1") int weeksToExtend, HttpServletRequest request) {
         log.info("######################### In Book Extend #########################");
         ModelAndView response = new ModelAndView("book/reserveProcess");
-        Book book=bookDAO.findById(bookId);
+        Book book = bookDAO.findById(bookId);
         Reservation reservation = reserveDAO.findById(reservationId);
         reserveDAO.delete(reservation);
         response.addObject("successMessage", "Book Rejected  successful!");
@@ -156,6 +158,7 @@ public class AdminController {
 
         return response;
     }
+
     @GetMapping("/book/manageReserve")
     public ModelAndView ManageReserve(@RequestParam(required = false) String search,
                                       @RequestParam(required = false, defaultValue = "1") int page) {
@@ -172,10 +175,11 @@ public class AdminController {
 
         return response;
     }
+
     @GetMapping("/book/edit/{id}")
     // public ModelAndView editBook(@PathVariable int id) {
     public ModelAndView editBook(@PathVariable int id, @RequestParam(required = false) String success) {
-        log.info("######################### In /Book/edit #########################");
+        log.info("######################### In /customer/edit #########################");
         ModelAndView response = new ModelAndView("book/create");
 
         Book book = bookDAO.findById(id);
@@ -193,18 +197,15 @@ public class AdminController {
             form.setImageUrl(book.getImageUrl());
             Categories category = book.getCategory();
 
-            // Assuming Categories has an 'id' property
             if (category != null) {
-                Integer categoryId =category.getId();
-                category.setId(categoryId);
+
                 form.setCategoryId(category.getId());
             }
         } else {
-            log.warn("Book with id " + id+ " was not found");
+            log.warn("Book with id " + id + " was not found");
         }
 
-        response.addObject("form",form) ;
+        response.addObject("form", form);
         return response;
-
     }
 }
