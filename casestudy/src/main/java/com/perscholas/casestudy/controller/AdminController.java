@@ -54,7 +54,7 @@ public class AdminController {
 
         return response;
     }
-    @GetMapping("/book/createSubmit")
+    @PostMapping("/book/createSubmit")
     public ModelAndView createBookSubmit(@Valid CreateBookFormBean form, BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
 
         if (bindingResult.hasErrors()) {
