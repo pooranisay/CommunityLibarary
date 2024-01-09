@@ -70,11 +70,12 @@
                                             <c:when test="${not empty book.reservations}">
                                                 <c:forEach var="reservation" items="${book.reservations}">
                                                     <c:choose>
-                                                        <c:when test="${reservation.status eq 'Reserved' or reservation.status eq 'Reserved-in progress'}">
-                                                            <a href="/book/edit/${book.id}" style="pointer-events: none; color: grey;">Edit</a>
+                                                        <c:when test="${reservation.status ne 'Reserved' and reservation.status ne 'Reserved-in progress'}">
+                                                        <a href="/book/edit/${book.id}">Edit</a>
+
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <a href="/book/edit/${book.id}">Edit</a>
+                                                            <a href="/book/edit/${book.id}" style="pointer-events: none; color: grey;">Edit</a>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </c:forEach>

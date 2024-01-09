@@ -54,7 +54,7 @@ public class AdminController {
 
         return response;
     }
-    @PostMapping("/book/createSubmit")
+    @GetMapping("/book/createSubmit")
     public ModelAndView createBookSubmit(@Valid CreateBookFormBean form, BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
 
         if (bindingResult.hasErrors()) {
@@ -187,10 +187,10 @@ public class AdminController {
         CreateBookFormBean form = new CreateBookFormBean();
 
         if (book != null) {
-            book.setId(book.getId());
-            book.setName(book.getName());
-            book.setAuthor(book.getAuthor());
-            book.setImageUrl(book.getImageUrl());
+            form.setId(book.getId());
+            form.setName(book.getName());
+            form.setAuthor(book.getAuthor());
+            form.setImageUrl(book.getImageUrl());
             Categories category = book.getCategory();
 
             // Assuming Categories has an 'id' property

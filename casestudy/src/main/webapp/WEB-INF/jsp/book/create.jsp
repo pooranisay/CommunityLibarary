@@ -20,8 +20,8 @@
         </c:if>
 
         <!-- Use POST method for form submissions that modify data -->
-        <form method="post" action="/book/createSubmit" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="${form.id}">
+         <form method="get" action="/book/createSubmit">
+                    <input type="hidden" name="id" value="${form.id}">
             <div class="row mt-4">
                 <div class="col-md-6">
                     <label for="name" class="form-label">Book Name</label>
